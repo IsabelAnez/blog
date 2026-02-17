@@ -39,4 +39,8 @@ class Post extends Model
         return $this->hasOneThrough(Tag::class, Post_tag::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
