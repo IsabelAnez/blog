@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
-
-
 
 class PostController extends Controller
 {
@@ -16,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::paginate();
+        $posts = Post::latest()->paginate();
         return view('posts.index', compact('posts'));
     }
 
@@ -33,14 +32,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         //
-        $request->validate([
-            'title'=>'required',
-            'body'=>'required',
-            'category_id'=>'required'
-        ]);
         Post::create($request->all());
         return $request->all();
     }
@@ -48,20 +42,20 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $post)
+    public function show(Post $post)
     {
         //
-        $post = Post::find($post);
+        // $post = Post::find($post);
         return view('posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $post)
+    public function edit(Post $post)
     {
         //
-        $post = Post::find($post);
+        // $post = Post::find($post);
         $categories = Category::all();
         return view('posts.edit', compact('post', 'categories'));
     }
@@ -69,15 +63,10 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $post)
+    public function update(PostRequest $request, Post $post)
     {
         //
-        $request->validate([
-            'title'=>'required',
-            'body'=>'required',
-            'category_id'=>'required'
-        ]);
-        $post = Post::find($post);
+        // $post = Post::find($post);
         $post->update($request->all());
         return redirect()->route('posts.index');
     }
@@ -85,10 +74,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $post)
+    public function destroy(Post $post)
     {
         //
-        $post = Post::find($post);
+        // $post = Post::find($post);
         $post->delete();
         return redirect()->route('posts.index');
     }

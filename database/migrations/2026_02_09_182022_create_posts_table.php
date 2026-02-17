@@ -16,12 +16,12 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('extract');
             $table->text('body');
             $table->string('image_path');
-            $table->string('is_publised');
-            $table->string('published_at');
+            $table->boolean('is_publised');
+            $table->date('published_at');
             $table->timestamps();
         });
     }

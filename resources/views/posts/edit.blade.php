@@ -1,6 +1,6 @@
 <x-layout>
     <h1>Editar Post</h1>
-    <form action="{{ route('posts.update', $post->id) }}" method="POST">
+    <form action="{{ route('posts.update', $post) }}" method="POST">
         @csrf
         @method('PUT')
         <div style="margin-bottom: 10px;">
@@ -13,11 +13,39 @@
                 </span>
             @enderror
         </div>
+        <div>
+            <label for="slug">Slug</label><br>
+            <input type="text" name="slug" id="slug" value="{{ old('slug', $post->slug) }}">
+
+            @error('slug')
+                <span style="color: red">{{ $message }}</span>
+            @enderror
+        </div>
         <div style="margin-bottom: 10px;">
-            <label for="body">Content</label><br>
+            <label for="extract">Extract</label><br>
+            <input type="text" name="extract" id="extract" value={{ old('extract', $post->extract)}}>
+            <br>
+            @error('extract')
+                <span style="color: red">
+                    {{$message}}
+                </span>
+            @enderror
+        </div>
+        <div style="margin-bottom: 10px;">
+            <label for="body">Body</label><br>
             <textarea name="body" id="body" cols="40" rows="7">{{ old('body', $post->body)}}</textarea>
             <br>
             @error('body')
+                <span style="color: red">
+                    {{$message}}
+                </span>
+            @enderror
+        </div>
+        <div style="margin-bottom: 10px;">
+            <label for="image_path">Image path</label><br>
+            <input type="text" name="image_path" id="image_path" value={{ old('image_path', $post->image_path)}}>
+            <br>
+            @error('image_path')
                 <span style="color: red">
                     {{$message}}
                 </span>

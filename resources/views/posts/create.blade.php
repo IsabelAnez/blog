@@ -12,14 +12,38 @@
                 </span>
             @enderror
         </div>
+        <div>
+            <label for="slug">Slug</label><br>
+            <input type="text" name="slug" id="slug" value="{{ old('slug') }}">
+
+            @error('slug')
+                <span style="color: red">{{ $message }}</span>
+            @enderror
+        </div>
+        <div>
+            <label for="extract">Extract</label><br>
+            <input type="text" name="extract" id="extract" value="{{ old('extract') }}">
+
+            @error('extract')
+                <span style="color: red">{{ $message }}</span>
+            @enderror
+        </div>
         <div style="margin-bottom: 10px;">
-            <label for="body">Content</label><br>
+            <label for="body">Body</label><br>
             <textarea name="body" id="body" cols="40" rows="7">{{ old('body')}}</textarea>
             <br>
             @error('body')
                 <span style="color: red">
                     {{$message}}
                 </span>
+            @enderror
+        </div>
+        <div>
+            <label for="image_path">Image path</label><br>
+            <input type="text" name="image_path" id="image_path" value="{{ old('image_path') }}">
+
+            @error('image_path')
+                <span style="color: red">{{ $message }}</span>
             @enderror
         </div>
         <div style="margin-bottom: 10px;">
@@ -39,6 +63,7 @@
                 </span>
             @enderror
         </div>
+        <br>
         <button type="submit">Create</button>
     </form>
 </x-layout>
