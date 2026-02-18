@@ -12,7 +12,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
         $categories = Category::latest()->paginate();
         return view('categories.index', compact('categories'));
     }
@@ -22,7 +21,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
         $categories = Category::all();
         return view('categories.create', compact('categories'));
     }
@@ -32,9 +30,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:categories,name'
+        ]);
         Category::create($request->all());
-        return $request->all();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -42,7 +42,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        // $post = Post::find($post);
         return view('categories.show', compact('category'));
     }
 
@@ -51,20 +50,17 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        // $post = Post::find($post);
-        $categories = Category::all();
-        return view('posts.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $category)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name'=>'required'
+            'name'=>'required|unique:categories,name'
         ]);
-        $category = Category::find($category);
         $category->update($request->all());
         return redirect()->route('categories.index');
     }
@@ -74,7 +70,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // $post = Post::find($post);
+        if($category->post->count() > 0){
+            return redirect()->route('categories.index');
+        }
         $category->delete();
         return redirect()->route('categories.index');
     }

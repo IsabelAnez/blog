@@ -44,8 +44,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-        // $post = Post::find($post);
         return view('posts.show', compact('post'));
     }
 
@@ -54,8 +52,6 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
-        // $post = Post::find($post);
         $categories = Category::all();
         return view('posts.edit', compact('post', 'categories'));
     }
@@ -65,8 +61,6 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        //
-        // $post = Post::find($post);
         $post->update($request->all());
         return redirect()->route('posts.index');
     }
@@ -76,8 +70,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
-        // $post = Post::find($post);
         $post->delete();
         return redirect()->route('posts.index');
     }
