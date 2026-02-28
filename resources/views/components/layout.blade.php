@@ -11,8 +11,8 @@
         <ul>
             <li><a href="{{ url('/') }}">Home</a></li>
             <li><a href="{{ route('posts.index') }}">Posts</a></li>
-            <li><a href=" {{ route('categories.index') }}">Categorías</a></li>
-            <li><a href="">Tags</a></li>
+            <li><a href="{{ route('categories.index') }}">Categorías</a></li>
+            <li><a href="{{ route('tags.index') }}">Tags</a></li>
         </ul>
     </nav>
     
