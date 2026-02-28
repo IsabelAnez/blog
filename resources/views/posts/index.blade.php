@@ -1,5 +1,7 @@
 <x-layout>
-    <a href="{{ route('posts.create') }}">Crear Post</a>
+    @can('create', App\Models\Post::class)
+        <a href="{{ route('posts.create') }}">Crear Post</a>
+    @endcan
     <h1>Listado de posts</h1>
 
     <ul>

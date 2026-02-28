@@ -1,5 +1,7 @@
 <x-layout>
-    <a href="{{ route('categories.create') }}">Crear Categoría</a>
+    @can('access-admin-panel')
+        <a href="{{ route('categories.create') }}">Crear Categoría</a>
+    @endcan
     <h1>Listado de categorías</h1>
 
     <ul>

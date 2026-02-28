@@ -1,6 +1,8 @@
 <x-layout>
-    <a href="{{ route('tags.create') }}">Crear Tag</a>
-    <h1>Tags</h1>
+    @can('access-admin-panel')
+        <a href="{{ route('tags.create') }}">Crear Tag</a>
+    @endcan
+    <h1>Listado de tags</h1>
 
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
@@ -9,13 +11,16 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                @can('access-admin-panel')
                 <th>Acciones</th>
+                @endcan
             </tr>
         </thead>
         <tbody>
             @foreach($tags as $tag)
                 <tr>
                     <td>{{ $tag->name }}</td>
+                    @can('access-admin-panel')
                     <td>
                         <a href="{{ route('tags.edit', $tag) }}">Editar</a>
 
@@ -25,6 +30,7 @@
                             <button type="submit">Eliminar</button>
                         </form>
                     </td>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>
