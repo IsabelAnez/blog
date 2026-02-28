@@ -64,6 +64,17 @@
             @enderror
         </div>
         <br>
+        <div style="margin-bottom: 10px;">
+            <label>Tags</label><br>
+            @foreach($tags as $tag)
+                <label>
+                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                        {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    {{ $tag->name }}
+                </label><br>
+            @endforeach
+        </div>
+        <br>
         <button type="submit">Create</button>
     </form>
 </x-layout>

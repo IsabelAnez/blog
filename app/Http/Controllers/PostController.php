@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,7 +27,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -35,8 +37,9 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         //
-        Post::create($request->all());
-        return $request->all();
+        $post = Post::create($request->except('tags'));
+        $post->tags()->sync($request->input('tags', []));
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -54,7 +57,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -62,7 +66,8 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        $post->update($request->all());
+        $post->update($request->except('tags'));
+        $post->tags()->sync($request->input('tags', []));
         return redirect()->route('posts.index');
     }
 

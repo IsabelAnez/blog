@@ -35,6 +35,8 @@ class PostRequest extends FormRequest
             'body'=>'required',
             'image_path'=>'required',
             'category_id'=>'required',
+            'tags'=>'nullable|array',
+            'tags.*'=> 'exists:tags,id',
         ];
     }
 }

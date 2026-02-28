@@ -2,6 +2,13 @@
     <a href="{{ route('posts.edit', $post) }}">Editar post</a>
     <h1>{{ $post->title }}</h1>
     <p>Categoría: {{ $post->category->name }}</p>
+    <p>Tags:
+        @forelse($post->tags as $tag)
+            {{ $tag->name }}{{ !$loop->last ? ', ' : '' }}
+        @empty
+        Sin tags
+        @endforelse
+    </p>
     <p>Extract: {{ $post->extract }}</p>
     <p>Image path: {{ $post->image_path }}</p>
     <div>{{ $post->body }}</div><br>

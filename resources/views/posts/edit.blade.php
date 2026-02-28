@@ -68,7 +68,16 @@
                 </span>
             @enderror
         </div>
-
+        <div style="margin-bottom: 10px;">
+            <label>Tags</label><br>
+            @foreach($tags as $tag)
+                <label>
+                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                        {{ in_array($tag->id, old('tags', $post->tags->pluck('id')->toArray())) ? 'checked' : '' }}>
+                    {{ $tag->name }}
+                </label><br>
+            @endforeach
+        </div>
         <button type="submit">Edit</button>
     </form>
 </x-layout>
