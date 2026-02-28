@@ -34,8 +34,9 @@ class Post extends Model
         return $this->hasMany(Post_tag::class);
     }
 
-    public function tag(){
-        return $this->hasOneThrough(Tag::class, Post_tag::class);
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tags');
     }
 
     public function getRouteKeyName()

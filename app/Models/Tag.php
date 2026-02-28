@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,14 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    /** @use HasFactory<\Database\Factories\TagFactory> */
     use HasFactory;
-    
-    public function post_tag(){
-        return $this->hasMany(Post_tag::class);
-    }
 
-    public function post(){
-        return $this->hasOneThrough(Post::class, Post_tag::class);
+    protected $fillable = ['name'];
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class, 'post_tags');
     }
 }
