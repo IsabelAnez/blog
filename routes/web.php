@@ -12,5 +12,8 @@ Route::get('/', function () {
 
 Route::resource('posts', PostController::class);
 Route::resource('categories', CategoryController::class);
-Route::resource('tags', TagController::class)->except(['show']);
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::resource('tags', TagController::class)->except(['show']);
+Route::get('/admin', function(){
+    return 'Zona admin';
+})->middleware(['web', 'auth.basic', 'can:access-admin-panel']);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('extract');
             $table->text('body');
             $table->string('image_path');
-            $table->boolean('is_publised');
+            $table->boolean('is_published');
             $table->date('published_at');
             $table->timestamps();
         });

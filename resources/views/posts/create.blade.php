@@ -75,6 +75,12 @@
             @endforeach
         </div>
         <br>
+        <div>
+            <label>
+                <input type="checkbox" name="is_publised" value="1" {{ old('is_publised') ? 'checked' : '' }}>
+                Publicar
+            </label>
+        </div>
         <button type="submit">Create</button>
     </form>
 </x-layout>

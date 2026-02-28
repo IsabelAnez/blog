@@ -1,5 +1,7 @@
 <x-layout>
-    <a href="{{ route('posts.edit', $post) }}">Editar post</a>
+    @can('update-post', $post)
+        <a href="{{ route('posts.edit', $post) }}">Editar post</a>
+    @endcan
     <h1>{{ $post->title }}</h1>
     <p>Categoría: {{ $post->category->name }}</p>
     <p>Tags:
@@ -13,12 +15,13 @@
     <p>Image path: {{ $post->image_path }}</p>
     <div>{{ $post->body }}</div><br>
 
+    @can('delete', $post)
     <form action="{{ route('posts.destroy', $post) }}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit">Delete</button>
     </form><br>
-    <hr>
+    @endcan
 
 <h3>Comentarios</h3>
 
